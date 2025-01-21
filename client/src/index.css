@@ -136,6 +136,10 @@ Buttons
   color: var(--primaryColor);
 }
 
+.submit-btn {
+  margin-top: 1rem;
+}
+
 /* 
 ==================
 Header Styles 
@@ -247,4 +251,27 @@ Page Styles
   margin: 0 auto;
   padding: 1rem;
   font-weight: 500;
+}
+
+/* 
+==================
+Form Styles 
+================== 
+*/
+
+.title-input {
+  border: #ccc;
+  text-align: left;
+  text-transform: capitalize;
+  font-size: 1rem;
+  outline: none;
+}
+
+.content-output {
+  text-align: left;
+  text-transform: capitalize;
+  padding: 0.5rem;
+  font-size: 1rem;
+  outline: none;
+  border: none;
 }

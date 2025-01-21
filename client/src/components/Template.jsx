@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import DOMPurify from 'dompurify';
-import EditLayout from './EditLayout';
-import { useAppContext } from './context';
+import EditLayoutForm from './EditLayoutForm';
+import { useAppContext } from '../context';
+import customFetch from '../utils/customFetch';
 
 function Template() {
   const [layout, setLayout] = useState('');
@@ -9,9 +10,8 @@ function Template() {
   const { isEditing } = useAppContext();
 
   const fetchData = async () => {
-    const response = await fetch(`http://localhost:5000/getEmailLayout`);
-    const data = await response.text();
-    setLayout(data);
+    const response = await customFetch.get(`/getEmailLayout`);
+    setLayout(response.data);
   };
 
   useEffect(() => {
@@ -23,7 +23,7 @@ function Template() {
   return (
     <div className="template-container">
       {isEditing ? (
-        <EditLayout />
+        <EditLayoutForm />
       ) : (
         <div dangerouslySetInnerHTML={{ __html: safeHTML }} />
       )}

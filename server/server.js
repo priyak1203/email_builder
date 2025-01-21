@@ -13,6 +13,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // middlewares
 app.use(cors());
+app.use(express.json());
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
@@ -20,6 +21,11 @@ app.get('/', (req, res) => {
 
 app.get('/getEmailLayout', (req, res) => {
   res.sendFile(path.resolve(__dirname, './layouts', 'sampleLayout.html'));
+});
+
+app.post('/uploadEmailConfig', (req, res) => {
+  console.log(req.body);
+  res.send('Upload Email Config');
 });
 
 const PORT = process.env.PORT || 3000;

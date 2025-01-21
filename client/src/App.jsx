@@ -1,5 +1,4 @@
-import SidePanel from './SidePanel';
-import Template from './Template';
+import { SidePanel, Template } from './components';
 
 function App() {
   return (

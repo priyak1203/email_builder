@@ -1,4 +1,4 @@
-import { useAppContext } from './context';
+import { useAppContext } from '../context';
 
 function SidePanel() {
   const { isEditing, setEditing } = useAppContext();
