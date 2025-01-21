@@ -5,6 +5,7 @@ function EditLayoutForm() {
   const [layoutContent, setLayoutContent] = useState({
     title: '',
     content: '',
+    footer: '',
   });
 
   const handleChange = (e) => {
@@ -52,7 +53,15 @@ function EditLayoutForm() {
             maxLength={500}
           />
         </div>
-
+        <div>
+          <input
+            placeholder="enter footer text"
+            className="footer footer-input"
+            name="footer"
+            value={layoutContent.footer}
+            onChange={(e) => handleChange(e)}
+          />
+        </div>
         <button className="btn-primary submit-btn">Submit</button>
       </form>
     </div>

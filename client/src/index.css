@@ -240,7 +240,7 @@ Page Styles
 .content {
   background-color: var(--mainWhite);
   width: 400px;
-  height: 300px;
+  height: 280px;
   display: grid;
   place-content: center;
   text-align: center;
@@ -251,6 +251,23 @@ Page Styles
   margin: 0 auto;
   padding: 1rem;
   font-weight: 500;
+}
+
+.footer {
+  margin: 8px 0 2px;
+  font-size: 1.2rem;
+  text-transform: capitalize;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.footer-input {
+  font-size: 0.9rem;
+  border: none;
+  padding: 0.1rem 1rem;
+  outline: none;
+  font-style: normal;
+  font-weight: normal;
 }
 
 /* 
