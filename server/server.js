@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import cors from 'cors';
+import { writeFileSync } from 'fs';
 
 dotenv.config();
 
@@ -24,7 +25,8 @@ app.get('/getEmailLayout', (req, res) => {
 });
 
 app.post('/uploadEmailConfig', (req, res) => {
-  console.log(req.body);
+  const emailConfig = req.body;
+  writeFileSync('emailConfig.json', JSON.stringify(emailConfig));
   res.send('Upload Email Config');
 });
 
