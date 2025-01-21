@@ -4,6 +4,7 @@ import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import cors from 'cors';
 import { writeFileSync } from 'fs';
+import router from './router/router.js';
 
 dotenv.config();
 
@@ -15,6 +16,9 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 // middlewares
 app.use(cors());
 app.use(express.json());
+
+// routes
+app.use('', router);
 
 app.get('/', (req, res) => {
   res.send('Hello World!');

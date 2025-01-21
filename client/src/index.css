@@ -229,6 +229,11 @@ Page Styles
   font-weight: 600;
 }
 
+.logo-input {
+  height: 6rem;
+  width: 6rem;
+}
+
 .title {
   margin: 1rem 0;
   background-color: var(--mainWhite);

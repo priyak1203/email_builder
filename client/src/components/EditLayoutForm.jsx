@@ -7,12 +7,21 @@ function EditLayoutForm() {
     title: '',
     content: '',
     footer: '',
+    imageUrl: '',
   });
 
   const { clearEditing } = useAppContext();
 
   const handleChange = (e) => {
     setLayoutContent({ ...layoutContent, [e.target.name]: e.target.value });
+  };
+
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append('logoImg', file);
+    const { data } = await customFetch.post('/uploadImage', formData);
+    setLayoutContent({ ...layoutContent, imageUrl: data.imageUrl });
   };
 
   const handleSubmit = async (e) => {
@@ -22,7 +31,6 @@ function EditLayoutForm() {
       `/uploadEmailConfig`,
       layoutContent
     );
-    console.log(response);
 
     // reset editing flag
     clearEditing();
@@ -31,8 +39,13 @@ function EditLayoutForm() {
   return (
     <>
       <form className="page" onSubmit={handleSubmit}>
-        <div>
-          <p className="logo">logo</p>
+        <div className="logo logo-input">
+          <input
+            type="file"
+            accept="image/*"
+            name="logoImg"
+            onChange={handleImageUpload}
+          />
         </div>
         <div>
           <input
