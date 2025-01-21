@@ -27,7 +27,7 @@ app.get('/getEmailLayout', (req, res) => {
 app.post('/uploadEmailConfig', (req, res) => {
   const emailConfig = req.body;
   writeFileSync('emailConfig.json', JSON.stringify(emailConfig));
-  res.send('Upload Email Config');
+  res.json({ message: 'configuration saved successfully' });
 });
 
 const PORT = process.env.PORT || 3000;
