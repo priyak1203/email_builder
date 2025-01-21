@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import DOMPurify from 'dompurify';
 import EditLayout from './EditLayout';
+import { useAppContext } from './context';
 
 function Template() {
   const [layout, setLayout] = useState('');
-  const [isEditing, setIsEditing] = useState(false);
+
+  const { isEditing } = useAppContext();
 
   const fetchData = async () => {
     const response = await fetch(`http://localhost:5000/getEmailLayout`);

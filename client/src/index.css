@@ -130,6 +130,12 @@ Buttons
   border-color: var(--primaryLightColor);
 }
 
+.btn-primary:disabled {
+  cursor: not-allowed;
+  background: var(--mainWhite);
+  color: var(--primaryColor);
+}
+
 /* 
 ==================
 Header Styles 
