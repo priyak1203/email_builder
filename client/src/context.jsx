@@ -9,8 +9,12 @@ const AppProvider = ({ children }) => {
     setIsEditing(true);
   };
 
+  const clearEditing = () => {
+    setIsEditing(false);
+  };
+
   return (
-    <AppContext.Provider value={{ isEditing, setEditing }}>
+    <AppContext.Provider value={{ isEditing, setEditing, clearEditing }}>
       {children}
     </AppContext.Provider>
   );

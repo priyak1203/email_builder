@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import customFetch from '../utils/customFetch';
+import { useAppContext } from '../context';
 
 function EditLayoutForm() {
   const [layoutContent, setLayoutContent] = useState({
@@ -8,28 +9,27 @@ function EditLayoutForm() {
     footer: '',
   });
 
+  const { clearEditing } = useAppContext();
+
   const handleChange = (e) => {
     setLayoutContent({ ...layoutContent, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(layoutContent);
-
-    // input validations
-    // Form Submission
-    // post api call
-    // reset editing flag
 
     const response = await customFetch.post(
       `/uploadEmailConfig`,
       layoutContent
     );
     console.log(response);
+
+    // reset editing flag
+    clearEditing();
   };
 
   return (
-    <div>
+    <>
       <form className="page" onSubmit={handleSubmit}>
         <div>
           <p className="logo">logo</p>
@@ -64,7 +64,7 @@ function EditLayoutForm() {
         </div>
         <button className="btn-primary submit-btn">Submit</button>
       </form>
-    </div>
+    </>
   );
 }
 
