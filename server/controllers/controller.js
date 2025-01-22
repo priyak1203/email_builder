@@ -1,9 +1,10 @@
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { writeFileSync, readFileSync } from 'fs';
+import { readFileSync } from 'fs';
 import cloudinary from 'cloudinary';
 import { formatImage } from '../middlewares/multer.js';
 import layoutConfig from '../models/layoutConfig.js';
+import ejs from 'ejs';
 
 // create __dirname
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -35,4 +36,22 @@ export const uploadEmailConfig = async (req, res) => {
   res.json({ message: 'configuration saved successfully' });
 };
 
-export const renderAndDownloadTemplate = () => {};
+export const renderAndDownloadTemplate = async (req, res) => {
+  const config = await layoutConfig.find({}).sort({ createdAt: -1 }).limit(1);
+  const { title, content, footer, imageUrl } = config[0];
+  const emailData = {
+    title,
+    content,
+    footer,
+    imageUrl,
+  };
+
+  const layoutHTML = readFileSync(
+    path.resolve(__dirname, '../layouts', 'layout.html'),
+    'utf-8'
+  );
+
+  const renderHTML = ejs.render(layoutHTML, emailData);
+
+  res.send(renderHTML);
+};

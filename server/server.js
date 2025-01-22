@@ -4,8 +4,6 @@ import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import cloudinary from 'cloudinary';
 import cors from 'cors';
-import { writeFileSync, readFileSync } from 'fs';
-import ejs from 'ejs';
 import router from './router/router.js';
 import mongoose from 'mongoose';
 
@@ -29,23 +27,10 @@ app.use(express.json());
 app.use('/resource', express.static(path.resolve(__dirname, './uploads')));
 
 // routes
-app.use('', router);
+app.use('/api', router);
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
-});
-
-app.get('/downloadTemplate', (req, res) => {
-  // const result = readFileSync('emailConfig.json', 'utf-8');
-  // const finalResult = JSON.parse(result);
-  // const layoutHTML = readFileSync(
-  //   path.resolve(__dirname, './layouts', 'layout.html'),
-  //   'utf-8'
-  // );
-  // console.log(layoutHTML);
-  // const renderHTML = ejs.render(layoutHTML, finalResult);
-  // console.log(renderHTML);
-  // res.send(renderHTML);
 });
 
 const PORT = process.env.PORT || 3000;
