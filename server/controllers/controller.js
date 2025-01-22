@@ -3,6 +3,7 @@ import { fileURLToPath } from 'url';
 import { writeFileSync, readFileSync } from 'fs';
 import cloudinary from 'cloudinary';
 import { formatImage } from '../middlewares/multer.js';
+import layoutConfig from '../models/layoutConfig.js';
 
 // create __dirname
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -28,9 +29,9 @@ export const uploadImage = async (req, res) => {
 };
 
 // UploadImageConfig
-export const uploadEmailConfig = (req, res) => {
+export const uploadEmailConfig = async (req, res) => {
   const emailConfig = req.body;
-  writeFileSync('emailConfig.json', JSON.stringify(emailConfig));
+  const response = await layoutConfig.create(emailConfig);
   res.json({ message: 'configuration saved successfully' });
 };
 

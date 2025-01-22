@@ -7,6 +7,7 @@ import cors from 'cors';
 import { writeFileSync, readFileSync } from 'fs';
 import ejs from 'ejs';
 import router from './router/router.js';
+import mongoose from 'mongoose';
 
 dotenv.config();
 
@@ -35,21 +36,26 @@ app.get('/', (req, res) => {
 });
 
 app.get('/downloadTemplate', (req, res) => {
-  const result = readFileSync('emailConfig.json', 'utf-8');
-  const finalResult = JSON.parse(result);
-
-  const layoutHTML = readFileSync(
-    path.resolve(__dirname, './layouts', 'layout.html'),
-    'utf-8'
-  );
-  console.log(layoutHTML);
-
-  const renderHTML = ejs.render(layoutHTML, finalResult);
-  console.log(renderHTML);
-
-  res.send(renderHTML);
+  // const result = readFileSync('emailConfig.json', 'utf-8');
+  // const finalResult = JSON.parse(result);
+  // const layoutHTML = readFileSync(
+  //   path.resolve(__dirname, './layouts', 'layout.html'),
+  //   'utf-8'
+  // );
+  // console.log(layoutHTML);
+  // const renderHTML = ejs.render(layoutHTML, finalResult);
+  // console.log(renderHTML);
+  // res.send(renderHTML);
 });
 
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => console.log(`Server is running on PORT: ${PORT}`));
+try {
+  await mongoose
+    .connect(process.env.MONGO_URI)
+    .then(() => console.log(`Connected to DB`));
+  app.listen(PORT, () => console.log(`Server is running on PORT: ${PORT}`));
+} catch (error) {
+  console.log(error);
+  process.exit(1);
+}
